@@ -1,10 +1,10 @@
 //jshint esversion:8
 const router = require("express").Router();
 const User = require("../model/User");
-const bcrypt = require("bcryptjs");
+const { Bcrypt } = require('bcrypt-rust-wasm');
 const jwt = require("jsonwebtoken");
 const { registerValidation, loginValidation } = require("../validation");
-
+const bcrypt = Bcrypt.new(parseInt(process.env.SALT_ROUNDS));
 //REGISTRATION ROUTE
 router.post("/register", async (req, res) => {
   //VALIDATE
@@ -22,23 +22,23 @@ router.post("/register", async (req, res) => {
   }
 
   //HASH PASSWORDS
-  const salt = await bcrypt.genSalt(parseInt(process.env.SALT_ROUNDS));
-  const hashPassword = await bcrypt.hash(req.body.password, salt);
-
+  
+  const hash = bcrypt.hashSync(req.body.password);
   const user = new User({
     name: req.body.name,
     email: req.body.email,
     regNo: req.body.regNo,
     gender: req.body.gender,
-    password: hashPassword
+    password: hash
   });
-  user.save()
-      .then(data => {
-        res.json(data);
-      })
-      .catch(err => {
-        res.json({message: err});
-      });
+  user
+    .save()
+    .then(data => {
+      res.json(data);
+    })
+    .catch(err => {
+      res.json({ message: err });
+    });
 });
 
 //LOGIN ROUTE
@@ -57,7 +57,7 @@ router.post("/login", async (req, res) => {
     return res.status(404).send("Email doesnt exist");
   }
   //PASSWORD IS CORRECT
-  const validPass = await bcrypt.compare(req.body.password, user.password);
+  const validPass = bcrypt.verifySync(req.body.password, user.password);
   if (!validPass) {
     return res.status(401).send("Password is wrong");
   }
