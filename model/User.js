@@ -24,6 +24,10 @@ const userSchema=new mongoose.Schema({
     type:String,
     required:true,
     min:8
+  },
+  github:{
+    type: Array,
+    required: false
   }
 });
 
