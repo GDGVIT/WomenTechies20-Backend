@@ -5,8 +5,7 @@ const Joi = require("@hapi/joi");
 //REGISTER VALIDATION
 const registerValidation = data => {
   const schema = Joi.object({
-    name: Joi.string()
-      .required(),
+    name: Joi.string().required(),
     email: Joi.string()
       .min(6)
       .required()
@@ -35,6 +34,20 @@ const loginValidation = data => {
   });
   return schema.validate(data);
 };
-
+const sponsorValidation = data => {
+  const schema = Joi.object({
+    name: Joi.string().required(),
+    company: Joi.string().required(),
+    email: Joi.string()
+      .min(6)
+      .required()
+      .email(),
+    phone: Joi.number()
+      .required()
+      .min(10)
+  });
+  return schema.validate(data);
+};
 module.exports.registerValidation = registerValidation;
 module.exports.loginValidation = loginValidation;
+module.exports.sponsorValidation = sponsorValidation;

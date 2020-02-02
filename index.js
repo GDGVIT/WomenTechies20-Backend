@@ -29,11 +29,13 @@ const authRoute = require("./routes/auth");
 const dashboardRoute = require("./routes/dashboard");
 const postgitlink = require("./routes/postgit");
 const getUsers = require("./routes/getusers");
-const hashtaginsta=require("./routes/searchhash");
+const hashtaginsta = require("./routes/searchhash");
+const sponsorus = require("./routes/sponsorus");
 app.use("/api/user", authRoute);
 app.use("/api/dashboard", dashboardRoute);
 app.use("/api/postgit", postgitlink);
 app.use("/api/getUsers", getUsers);
-app.use("/api/hashtaginsta",hashtaginsta);
+app.use("/api/hashtaginsta", hashtaginsta);
+app.use("/api/sponsorus", sponsorus);
 
 app.listen(process.env.PORT, () => console.log("Server is up and running"));
