@@ -24,7 +24,8 @@
 
 ## Instructions to run
 
-- Pre-requisites: - Node.js installed with npm enabled
+- Pre-requisites: 
+  - Node.js installed with npm enabled
 
   - An active internet connection to connect to the cloud database - All the npm packages mentioned in the package.json
 
