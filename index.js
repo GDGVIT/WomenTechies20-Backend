@@ -6,7 +6,7 @@ const dotenv = require("dotenv");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
-var whitelist = ['https://womentechies.dscvit.com'];
+var whitelist = ['https://womentechies.dscvit.com','https://prakhar0912.github.io'];
 var corsOptions = {
   origin: (origin, callback) => {
     if (whitelist.indexOf(origin) !== -1) {
