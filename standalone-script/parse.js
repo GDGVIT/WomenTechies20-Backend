@@ -1,7 +1,6 @@
 //jshint esversion:6
-const uuid4 = require("uuid4");
+const generator = require("generate-password");
 const csv = require("csv-parser");
-const write = require("csv-writer");
 const createCsvWriter = require("csv-writer").createObjectCsvWriter;
 const csvWriter = createCsvWriter({
   path: "details1.csv",
@@ -35,7 +34,12 @@ const fs = require("fs");
 fs.createReadStream("details.csv")
   .pipe(csv())
   .on("data", row => {
-    row.password = uuid4();
+    row.password = generator.generate({
+      length: 6,
+      numbers: true,
+      excludeSimilarCharacters: true,
+      lowercase: false
+    });
     q = q.concat(row);
     csvWriter.writeRecords(q);
   })

@@ -33,7 +33,7 @@ const uploadData = () => {
               console.error(err);
             } else {
               console.log("CSV file successfully uploaded");
-              fs.unlinkSync("./details.csv");
+              //fs.unlinkSync("./details.csv");
               process.exit(0);
             }
           });
