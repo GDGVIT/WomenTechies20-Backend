@@ -9,7 +9,7 @@
   "author": "Hishaam",
   "license": "ISC",
   "dependencies": {
-    "@hapi/joi": "^17.1.0",
+    "@hapi/joi": "^17.1.1",
     "bcrypt-rust-wasm": "^0.1.8",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
